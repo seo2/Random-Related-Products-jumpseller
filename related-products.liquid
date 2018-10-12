@@ -1,0 +1,28 @@
+
+<div class="row ">
+    <script>
+		var posts = 0;
+        var sponsorList=new Array()
+        
+	          {% assign cat_id = product.categories.first.permalink %}
+	          {% for prod in store.category[cat_id].products limit:12 %} 
+	          {% unless prod.id == product.id %}
+        sponsorList[posts]='<div class="col-sm-4"><div class="producto"><a href="{{prod.url}}"><img class="img-fluid mx-auto img-producto" src="{{ prod.images.first }}" alt="{{prod.name}}"></a><div class="producto-nombre">{{prod.name }}</div><div class="producto-precio">{% if prod.discount > 0 %}<span class="product-block-normal">{{ prod.price | minus:prod.discount | price }}</span> <span class="product-block-discount">{{ prod.price | price }}</span>{% else %}<span class="product-block-list">{{ prod.price | price }}</span>{% endif %}</div></div></div>';
+        	posts++
+	          {% endunless %}
+	          {% endfor %}
+  
+
+        var i=0
+        var random
+        while (i<3){
+            random=Math.floor(Math.random()*sponsorList.length)
+            if (sponsorList[random]!="selected"){
+                document.write(sponsorList[random])
+                sponsorList[random]="selected"
+                i++
+            }
+        }
+    </script>
+
+</div> <!-- /row -->	
